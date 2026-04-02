@@ -459,6 +459,7 @@ nav{
   .section-tabs{display:none}
 }
 </style>
+
 </head>
 <body>
 
@@ -985,41 +986,57 @@ async function unlockReport() {
   userEmail = email;
   userCompany = company;
 
-  // Show loading on button
   const btn = document.querySelector('.btn-gate');
   btn.textContent = 'Preparing your report...';
   btn.disabled = true;
 
-  // Calculate scores for email
+  // Calculate scores
   const scores = calculateScores();
 
-  // Send to Formspree in background (non-blocking)
-  try {
-    const formData = new FormData();
-    formData.append('Name', name);
-    formData.append('Email', email);
-    formData.append('Company', company);
-    formData.append('Overall Score', scores.overall + '/100');
-    formData.append('Data Quality', scores.sectionScores[0] + '/100');
-    formData.append('Copilot Setup', scores.sectionScores[1] + '/100');
-    formData.append('AI Agents', scores.sectionScores[2] + '/100');
-    formData.append('User Adoption', scores.sectionScores[3] + '/100');
-    formData.append('Security', scores.sectionScores[4] + '/100');
-    formData.append('ROI Value', scores.sectionScores[5] + '/100');
-    formData.append('_subject', 'New Copilot Readiness Assessment — ' + company + ' scored ' + scores.overall + '/100');
-    formData.append('_replyto', email);
-
-    fetch('https://formspree.io/f/mykbdjjj', {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    }); // Fire and forget — don't block the UI
-  } catch(e) {
-    // Silently fail — user still gets their report
-    console.log('Form submission error:', e);
+  // Verdict
+  let verdict, topRec;
+  if (scores.overall >= 75) {
+    verdict = 'Strong Foundation';
+    topRec = 'Focus on expanding agent configuration and measuring ROI to maximise your existing investment.';
+  } else if (scores.overall >= 50) {
+    verdict = 'Good Progress';
+    topRec = 'Address data quality gaps and boost adoption through a structured change management programme.';
+  } else if (scores.overall >= 25) {
+    verdict = 'Early Stage';
+    topRec = 'Start with ERP DataReady to clean your data, then deploy your first RoleFlow Agent within 14 days.';
+  } else {
+    verdict = 'Critical Gaps — Immediate Action Needed';
+    topRec = 'Your Copilot investment is at risk. Contact us for an emergency AI activation plan.';
   }
 
-  // Show results immediately
+  // Send via Web3Forms — notifies hello@alturate.com AND auto-replies to customer
+  try {
+    const fd = new FormData();
+    fd.append('access_key', '6413159c-9e3a-48e1-9225-8b4ed8974247');
+    fd.append('name', name);
+    fd.append('email', email);
+    fd.append('company', company);
+    fd.append('overall_score', scores.overall + '/100 — ' + verdict);
+    fd.append('data_quality', scores.sectionScores[0] + '/100');
+    fd.append('copilot_setup', scores.sectionScores[1] + '/100');
+    fd.append('ai_agents', scores.sectionScores[2] + '/100');
+    fd.append('user_adoption', scores.sectionScores[3] + '/100');
+    fd.append('security', scores.sectionScores[4] + '/100');
+    fd.append('roi_value', scores.sectionScores[5] + '/100');
+    fd.append('top_recommendation', topRec);
+    fd.append('subject', 'New Assessment Lead: ' + company + ' scored ' + scores.overall + '/100 — ' + verdict);
+    fd.append('from_name', 'Alturate Assessment');
+    // Auto-reply to customer
+    fd.append('_autoresponse', 'Thank you for completing the Alturate Copilot Readiness Assessment! Your score is ready on screen. Our team will personally review your results and reach out within 24 hours to walk you through your findings and build your AI activation roadmap. Can not wait? Book a call directly: https://alturate.com/contact.html — The Alturate Team');
+    await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: fd
+    });
+  } catch(e) {
+    console.log('Submission error:', e);
+  }
+
+  // Show results
   setTimeout(() => {
     document.getElementById('emailGate').style.display = 'none';
     showResults();

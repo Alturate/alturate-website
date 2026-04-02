@@ -236,7 +236,10 @@
     <h2 class="form-title">Book Your Free Assessment</h2>
     <p class="form-sub">Fill in your details and an Alturate expert will reach out within 24 hours to schedule your free Copilot Readiness Assessment call.</p>
 
-    <form id="contactForm" onsubmit="handleSubmit(event)" action="https://formspree.io/f/xdaplzee" method="POST">
+    <form id="contactForm" onsubmit="handleSubmit(event)" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="6413159c-9e3a-48e1-9225-8b4ed8974247">
+      <input type="hidden" name="from_name" value="Alturate Contact Form">
+      <input type="hidden" name="_autoresponse" value="Thank you for reaching out to Alturate! We have received your request and our team will get back to you within 24 hours to schedule your free Copilot Readiness Assessment. Can not wait? Take the assessment now: https://alturate.com/assessment.html — The Alturate Team">
       <div class="form-row">
         <div class="form-group">
           <label for="firstName">First Name *</label>
@@ -321,9 +324,16 @@
         <li><span class="next-num">1</span>You submit this form — takes 3 minutes</li>
         <li><span class="next-num">2</span>An Alturate expert reviews your details within 24 hours</li>
         <li><span class="next-num">3</span>We schedule a 15-minute discovery call at your convenience</li>
-        <li><span class="next-num">4</span>You receive your full Copilot Readiness Score report — free</li>
+        <li><span class="next-num">4</span>We walk you through your Copilot Readiness Score together on the call</li>
         <li><span class="next-num">5</span>We present a clear, no-obligation roadmap to AI activation</li>
       </ul>
+    </div>
+
+    <div class="sidebar-card" style="background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.2)">
+      <div class="sidebar-icon">🎯</div>
+      <h3>Want Your Score Right Now?</h3>
+      <p>Take our 15-minute interactive assessment and get your Copilot Readiness Score instantly — no waiting for a call.</p>
+      <a href="assessment.html" class="sidebar-link" style="background:var(--gold);color:var(--navy);padding:10px 20px;border-radius:7px;font-weight:700;font-size:0.82rem;text-decoration:none;display:inline-block;margin-top:4px">Take the Assessment →</a>
     </div>
 
     <div class="sidebar-card">
@@ -373,8 +383,8 @@ async function handleSubmit(e) {
   try {
     const data = new FormData(form);
     // Add extra context fields
-    data.append('_subject', 'New Alturate Assessment Request from ' + (document.getElementById('company').value || 'Unknown Company'));
-    data.append('_replyto', document.getElementById('email').value);
+    data.append('subject', 'New Alturate Assessment Request from ' + (document.getElementById('company').value || 'Unknown Company'));
+    data.append('replyto', document.getElementById('email').value);
 
     const res = await fetch(form.action, {
       method: 'POST',
