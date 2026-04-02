@@ -590,7 +590,7 @@ nav{
       <div class="cta-card-icon">📩</div>
       <div class="cta-card-text" style="flex:1">
         <h3>We have received your results!</h3>
-        <p>Our team at <strong style="color:var(--gold)">hello@alturate.com</strong> will personally review your scores and email you within 24 hours with a custom AI activation roadmap. Want to move faster? Book a call now.</p>
+        <p>Our team at <strong style="color:var(--gold)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e38b868f8f8ca3828f979691829786cd808c8e">[email&#160;protected]</a></strong> will personally review your scores and email you within 24 hours with a custom AI activation roadmap. Want to move faster? Book a call now.</p>
       </div>
       <a href="contact.html" class="btn-cta" style="flex-shrink:0">Book a Call →</a>
     </div>
@@ -599,7 +599,7 @@ nav{
 
 </div><!-- end assessment-wrap -->
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ════════════════════════════════════════
 // ASSESSMENT DATA — 18 Questions across 6 sections
 // ════════════════════════════════════════
@@ -1210,16 +1210,4 @@ function retakeAssessment() {
   document.getElementById('progressWrap').style.display = 'block';
   document.getElementById('sectionTabs').style.display = 'flex';
   document.getElementById('questionCard').style.display = 'block';
-  renderQuestion();
-  window.scrollTo(0,0);
-}
-
-// ── INIT ──
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', renderQuestion);
-} else {
-  renderQuestion();
-}
-</script>
-</body>
-</html>
+  
