@@ -460,6 +460,14 @@ nav{
 }
 </style>
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init("MHnqx3wrc7rFlVpB0");
+    }
+  });
+</script>
 </head>
 <body>
 
@@ -580,12 +588,12 @@ nav{
     </div>
 
     <div class="cta-card">
-      <div class="cta-card-icon">🚀</div>
+      <div class="cta-card-icon">📩</div>
       <div class="cta-card-text" style="flex:1">
-        <h3>Ready to fix these gaps in 14 days?</h3>
-        <p>Our team can review your results and build you a custom AI activation roadmap — no obligation, no cost. Most clients see measurable Copilot adoption within the first 2 weeks.</p>
+        <h3>We have received your results!</h3>
+        <p>Our team at <strong style="color:var(--gold)">hello@alturate.com</strong> will personally review your scores and email you within 24 hours with a custom AI activation roadmap. Want to move faster? Book a call now.</p>
       </div>
-      <a href="contact.html" class="btn-cta" style="flex-shrink:0">Get Your Roadmap →</a>
+      <a href="contact.html" class="btn-cta" style="flex-shrink:0">Book a Call →</a>
     </div>
 
   </div>
@@ -1026,14 +1034,35 @@ async function unlockReport() {
     fd.append('top_recommendation', topRec);
     fd.append('subject', 'New Assessment Lead: ' + company + ' scored ' + scores.overall + '/100 — ' + verdict);
     fd.append('from_name', 'Alturate Assessment');
-    // Auto-reply to customer
-    fd.append('autoresponse', 'Thank you for completing the Alturate Copilot Readiness Assessment! Your score is ready on screen. Our team will personally review your results and reach out within 24 hours to walk you through your findings and build your AI activation roadmap. Can not wait? Book a call directly: https://alturate.com/contact.html — The Alturate Team');
+
     await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       body: fd
     });
   } catch(e) {
     console.log('Submission error:', e);
+  }
+
+  // Send personalised report email to customer via EmailJS
+  try {
+    if (typeof emailjs !== 'undefined') {
+      await emailjs.send("service_cyqs9sa", "template_b10hpop", {
+      to_name:          name,
+      to_email:         email,
+      company:          company,
+      overall_score:    scores.overall + '/100',
+      data_quality:     scores.sectionScores[0] + '/100',
+      copilot_setup:    scores.sectionScores[1] + '/100',
+      ai_agents:        scores.sectionScores[2] + '/100',
+      user_adoption:    scores.sectionScores[3] + '/100',
+      security:         scores.sectionScores[4] + '/100',
+      roi_value:        scores.sectionScores[5] + '/100',
+      top_recommendation: topRec
+    });
+      console.log('Report email sent to customer');
+    }
+  } catch(e) {
+    console.log('EmailJS error:', e);
   }
 
   // Show results
