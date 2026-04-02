@@ -1027,7 +1027,7 @@ async function unlockReport() {
     fd.append('subject', 'New Assessment Lead: ' + company + ' scored ' + scores.overall + '/100 — ' + verdict);
     fd.append('from_name', 'Alturate Assessment');
     // Auto-reply to customer
-    fd.append('_autoresponse', 'Thank you for completing the Alturate Copilot Readiness Assessment! Your score is ready on screen. Our team will personally review your results and reach out within 24 hours to walk you through your findings and build your AI activation roadmap. Can not wait? Book a call directly: https://alturate.com/contact.html — The Alturate Team');
+    fd.append('autoresponse', 'Thank you for completing the Alturate Copilot Readiness Assessment! Your score is ready on screen. Our team will personally review your results and reach out within 24 hours to walk you through your findings and build your AI activation roadmap. Can not wait? Book a call directly: https://alturate.com/contact.html — The Alturate Team');
     await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       body: fd
