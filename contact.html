@@ -205,11 +205,6 @@
   }
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script type="text/javascript">
-  window.addEventListener('load', function() {
-    emailjs.init("MHnqx3wrc7rFlVpB0");
-  });
-</script>
 </head>
 <body>
 
@@ -373,54 +368,61 @@
   <p style="color:var(--gold);font-size:0.78rem">Elevate. Accelerate. Automate.</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-async function handleSubmit(e) {
-  e.preventDefault();
-  const form = document.getElementById('contactForm');
-  const btn = form.querySelector('.btn-submit');
-  const success = document.getElementById('successState');
 
-  // Show loading state
-  btn.textContent = 'Sending...';
-  btn.style.opacity = '0.7';
-  btn.disabled = true;
+<script>
+  // Initialize EmailJS
+  window.addEventListener('load', function() {
+    emailjs.init("MHnqx3wrc7rFlVpB0");
+  });
 
-  try {
-    const data = new FormData(form);
-    // Add extra context fields
-    data.append('subject', 'New Alturate Assessment Request from ' + (document.getElementById('company').value || 'Unknown Company'));
-    data.append('replyto', document.getElementById('email').value);
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('contactForm');
+    const btn = form.querySelector('.btn-submit');
+    const success = document.getElementById('successState');
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const name = (firstName + ' ' + lastName).trim();
+    const email = document.getElementById('email').value.trim();
+    const company = document.getElementById('company').value.trim();
 
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
+    btn.textContent = 'Sending...';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
 
-    // Send confirmation email to customer via EmailJS
     try {
-      const name = (document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value).trim();
-      const email = document.getElementById('email').value.trim();
-      const company = document.getElementById('company').value.trim();
-      await emailjs.send("service_cyqs9sa", "template_b10hpop", {
-        to_name:            name,
-        to_email:           email,
-        company:            company,
-        overall_score:      'Pending — we will assess on the call',
-        data_quality:       'To be assessed',
-        copilot_setup:      'To be assessed',
-        ai_agents:          'To be assessed',
-        user_adoption:      'To be assessed',
-        security:           'To be assessed',
-        roi_value:          'To be assessed',
-        top_recommendation: 'Our team will walk you through your full Copilot Readiness Score on your discovery call. We will reach out within 24 hours to schedule.'
-      });
-      console.log('Confirmation email sent to:', email);
-    } catch(ejErr) {
-      console.log('EmailJS error:', ejErr.text || ejErr);
-    }
+      // 1. Send to hello@alturate.com via Web3Forms
+      const data = new FormData(form);
+      data.append('subject', 'New Contact Request from ' + company);
+      data.append('replyto', email);
 
-    if (res.ok) {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      // 2. Send confirmation email to customer via EmailJS
+      try {
+        await emailjs.send("service_cyqs9sa", "template_b10hpop", {
+          to_name:            name,
+          to_email:           email,
+          company:            company,
+          overall_score:      'Pending — we will assess on the call',
+          data_quality:       'To be assessed',
+          copilot_setup:      'To be assessed',
+          ai_agents:          'To be assessed',
+          user_adoption:      'To be assessed',
+          security:           'To be assessed',
+          roi_value:          'To be assessed',
+          top_recommendation: 'Our team will walk you through your full Copilot Readiness Score on your discovery call. We will reach out within 24 hours to schedule.'
+        });
+        console.log('Confirmation email sent to:', email);
+      } catch(ejErr) {
+        console.log('EmailJS error:', ejErr.text || ejErr);
+      }
+
+      // 3. Show success state
       form.style.opacity = '0';
       form.style.transition = 'opacity 0.4s';
       setTimeout(() => {
@@ -430,6 +432,15 @@ async function handleSubmit(e) {
         success.style.transition = 'opacity 0.4s';
         setTimeout(() => { success.style.opacity = '1'; }, 50);
       }, 400);
-    } else {
+
+    } catch(err) {
+      console.log('Submit error:', err);
       btn.textContent = 'Book My Free Assessment →';
-     
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      alert('Connection error. Please email us directly at hello@alturate.com');
+    }
+  }
+</script>
+</body>
+</html>
