@@ -462,10 +462,9 @@ nav{
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof emailjs !== 'undefined') {
-      emailjs.init("MHnqx3wrc7rFlVpB0");
-    }
+  window.addEventListener('load', function() {
+    emailjs.init("MHnqx3wrc7rFlVpB0");
+    console.log('EmailJS initialized');
   });
 </script>
 </head>
@@ -1045,24 +1044,23 @@ async function unlockReport() {
 
   // Send personalised report email to customer via EmailJS
   try {
-    if (typeof emailjs !== 'undefined') {
-      await emailjs.send("service_cyqs9sa", "template_b10hpop", {
-      to_name:          name,
-      to_email:         email,
-      company:          company,
-      overall_score:    scores.overall + '/100',
-      data_quality:     scores.sectionScores[0] + '/100',
-      copilot_setup:    scores.sectionScores[1] + '/100',
-      ai_agents:        scores.sectionScores[2] + '/100',
-      user_adoption:    scores.sectionScores[3] + '/100',
-      security:         scores.sectionScores[4] + '/100',
-      roi_value:        scores.sectionScores[5] + '/100',
+    const emailParams = {
+      to_name:            name,
+      to_email:           email,
+      company:            company,
+      overall_score:      scores.overall + '/100',
+      data_quality:       scores.sectionScores[0] + '/100',
+      copilot_setup:      scores.sectionScores[1] + '/100',
+      ai_agents:          scores.sectionScores[2] + '/100',
+      user_adoption:      scores.sectionScores[3] + '/100',
+      security:           scores.sectionScores[4] + '/100',
+      roi_value:          scores.sectionScores[5] + '/100',
       top_recommendation: topRec
-    });
-      console.log('Report email sent to customer');
-    }
+    };
+    await emailjs.send("service_cyqs9sa", "template_b10hpop", emailParams);
+    console.log('Report email sent to:', email);
   } catch(e) {
-    console.log('EmailJS error:', e);
+    console.log('EmailJS error:', e.text || e);
   }
 
   // Show results
