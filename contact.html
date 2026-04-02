@@ -236,29 +236,29 @@
     <h2 class="form-title">Book Your Free Assessment</h2>
     <p class="form-sub">Fill in your details and an Alturate expert will reach out within 24 hours to schedule your free Copilot Readiness Assessment call.</p>
 
-    <form id="contactForm" onsubmit="handleSubmit(event)">
+    <form id="contactForm" onsubmit="handleSubmit(event)" action="https://formspree.io/f/xdaplzee" method="POST">
       <div class="form-row">
         <div class="form-group">
           <label for="firstName">First Name *</label>
-          <input type="text" id="firstName" placeholder="John" required>
+          <input type="text" id="firstName" name="First Name" placeholder="John" required>
         </div>
         <div class="form-group">
           <label for="lastName">Last Name *</label>
-          <input type="text" id="lastName" placeholder="Smith" required>
+          <input type="text" id="lastName" name="Last Name" placeholder="Smith" required>
         </div>
       </div>
       <div class="form-group">
         <label for="email">Work Email *</label>
-        <input type="email" id="email" placeholder="john@company.com" required>
+        <input type="email" id="email" name="Email" placeholder="john@company.com" required>
       </div>
       <div class="form-group">
         <label for="company">Company Name *</label>
-        <input type="text" id="company" placeholder="Acme Corp" required>
+        <input type="text" id="company" name="Company" placeholder="Acme Corp" required>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label for="employees">Company Size *</label>
-          <select id="employees" required>
+          <select id="employees" name="Company Size" required>
             <option value="" disabled selected>Select size</option>
             <option>10–50 employees</option>
             <option>51–150 employees</option>
@@ -268,7 +268,7 @@
         </div>
         <div class="form-group">
           <label for="erp">ERP Platform *</label>
-          <select id="erp" required>
+          <select id="erp" name="ERP Platform" required>
             <option value="" disabled selected>Select platform</option>
             <option>Dynamics 365 Business Central</option>
             <option>Dynamics 365 Finance & Operations</option>
@@ -281,7 +281,7 @@
       </div>
       <div class="form-group">
         <label for="challenge">Your biggest Copilot / AI challenge? *</label>
-        <select id="challenge" required>
+        <select id="challenge" name="Main Challenge" required>
           <option value="" disabled selected>Select your main challenge</option>
           <option>We have Copilot licenses but nobody uses them</option>
           <option>Our ERP data is too messy for AI to work</option>
@@ -294,7 +294,7 @@
       </div>
       <div class="form-group">
         <label for="message">Anything else we should know? (optional)</label>
-        <textarea id="message" placeholder="Tell us about your current Dynamics setup, timeline, or specific goals..."></textarea>
+        <textarea id="message" name="Message" placeholder="Tell us about your current Dynamics setup, timeline, or specific goals..."></textarea>
       </div>
       <div class="form-check">
         <input type="checkbox" id="consent" required>
@@ -359,19 +359,51 @@
 </footer>
 
 <script>
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
   const form = document.getElementById('contactForm');
+  const btn = form.querySelector('.btn-submit');
   const success = document.getElementById('successState');
-  form.style.opacity = '0';
-  form.style.transition = 'opacity 0.4s';
-  setTimeout(() => {
-    form.style.display = 'none';
-    success.style.display = 'block';
-    success.style.opacity = '0';
-    success.style.transition = 'opacity 0.4s';
-    setTimeout(() => { success.style.opacity = '1'; }, 50);
-  }, 400);
+
+  // Show loading state
+  btn.textContent = 'Sending...';
+  btn.style.opacity = '0.7';
+  btn.disabled = true;
+
+  try {
+    const data = new FormData(form);
+    // Add extra context fields
+    data.append('_subject', 'New Alturate Assessment Request from ' + (document.getElementById('company').value || 'Unknown Company'));
+    data.append('_replyto', document.getElementById('email').value);
+
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      form.style.opacity = '0';
+      form.style.transition = 'opacity 0.4s';
+      setTimeout(() => {
+        form.style.display = 'none';
+        success.style.display = 'block';
+        success.style.opacity = '0';
+        success.style.transition = 'opacity 0.4s';
+        setTimeout(() => { success.style.opacity = '1'; }, 50);
+      }, 400);
+    } else {
+      btn.textContent = 'Book My Free Assessment →';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      alert('Something went wrong. Please email us directly at hello@alturate.com');
+    }
+  } catch(err) {
+    btn.textContent = 'Book My Free Assessment →';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    alert('Connection error. Please email us directly at hello@alturate.com');
+  }
 }
 </script>
 </body>
