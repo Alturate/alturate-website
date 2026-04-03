@@ -404,18 +404,10 @@
 
       // 2. Send confirmation email to customer via EmailJS
       try {
-        await emailjs.send("service_cyqs9sa", "template_b10hpop", {
-          to_name:            name,
-          to_email:           email,
-          company:            company,
-          overall_score:      'Pending — we will assess on the call',
-          data_quality:       'To be assessed',
-          copilot_setup:      'To be assessed',
-          ai_agents:          'To be assessed',
-          user_adoption:      'To be assessed',
-          security:           'To be assessed',
-          roi_value:          'To be assessed',
-          top_recommendation: 'Our team will walk you through your full Copilot Readiness Score on your discovery call. We will reach out within 24 hours to schedule.'
+        await emailjs.send("service_cyqs9sa", "template_82cq1di", {
+          to_name:   name,
+          to_email:  email,
+          company:   company
         });
         console.log('Confirmation email sent to:', email);
       } catch(ejErr) {
