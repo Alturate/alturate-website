@@ -1,36 +1,28 @@
-# Alturate LLP website update
+# Alturate Website
 
-Static HTML replacement package for alturate.com.
+Static website for Alturate.
 
-## Files included
-- index.html
-- services.html
-- about.html
-- contact.html
-- assessment.html
-- privacy.html
-- thank-you.html
+## Upload instructions
 
-## Notes
-- Uses the existing Web3Forms access key from the current public contact.html source.
-- Removes inactive partners@alturate.com.
-- Replaces Alturate Inc. with Alturate LLP.
-- Positions Alturate around D365 F&O, ERP data readiness, Fabric/Power BI reporting, automation, and practical AI readiness.
-- No paid tools required.
+Upload these files and folders to the GitHub repository root:
 
-## Upload
-Replace the files in the root of the GitHub repo and deploy through Cloudflare Pages/GitHub integration.
+- `index.html`
+- `about.html`
+- `services.html`
+- `assessment.html`
+- `contact.html`
+- `privacy.html`
+- `thank-you.html`
+- `_redirects`
+- `_headers`
+- `favicon.png`
+- `favicon.ico`
+- `assets/`
 
+## Important
 
-## Logo
-The site uses the original Alturate logo image at `assets/alturate-logo.png`. Do not add LLP or alter the logo artwork; keep legal entity wording in page copy/footer only.
+Do not upload extensionless page files such as `about`, `services`, `contact`, `assessment`, `privacy`, or `thank-you`.
 
+The `_redirects` file handles clean URLs like `/about` and sends them to `/about.html`.
 
-## Logo and favicon
-
-The HTML files embed the exact Alturate PNG logo as a data URI for the header, footer, and favicon. This prevents broken logos when opening individual HTML files locally. The same logo is also included at `assets/alturate-logo.png` and `favicon.png` for future use.
-
-
-Brand assets included:
-- `assets/alturate-logo.png` full wordmark logo
-- `favicon.png` / `favicon.ico` square A-mark favicon
+If old extensionless files already exist in GitHub, delete them from the repo.

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D365 AI & Data Readiness Score — Alturate</title>
-<meta name="description" content="Free readiness score for Dynamics 365 F&O data, reporting, workflows, security, Fabric, Copilot, and AI readiness.">
+<title>Book a Call — Alturate</title>
+<meta name="description" content="Book a free discovery call with Alturate LLP for D365 F&O, Fabric/Power BI, ERP data readiness, automation, and AI readiness support.">
 <meta name="theme-color" content="#0a0f1e">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,9 +35,9 @@
     <ul class="nav-links">
       <li><a class="" href="index.html">Home</a></li>
       <li><a class="" href="services.html">Services</a></li>
-      <li><a class="active" href="assessment.html">AI Readiness Score</a></li>
+      <li><a class="" href="assessment.html">AI Readiness Score</a></li>
       <li><a class="" href="about.html">About</a></li>
-      <li><a class="nav-cta " href="contact.html">Book a Call →</a></li>
+      <li><a class="nav-cta active" href="contact.html">Book a Call →</a></li>
     </ul>
     <a class="mobile-only btn btn-primary" href="contact.html" style="padding:9px 12px;font-size:.78rem">Book</a>
   </div>
@@ -46,74 +46,49 @@
 
 <header class="hero">
   <div class="container">
-    <div class="eyebrow">Free score</div>
-    <h1>D365 AI & Data <span class="gold-text">Readiness Score.</span></h1>
-    <p class="lead">Answer a short set of questions to see whether your Dynamics 365 F&O data, reporting, workflows, and security are ready for AI, Copilot, and automation.</p>
+    <div class="eyebrow">Get in touch</div>
+    <h1>Book a free <span class="gold-text">30-minute discovery call.</span></h1>
+    <p class="lead">Tell us what is happening with your Dynamics 365 F&O environment, reporting, automation, or AI readiness. We will respond within one business day.</p>
   </div>
 </header>
 
 <section class="section section-alt">
-  <div class="container">
-    <div id="quiz" class="quiz-card">
-      <span class="badge" id="categoryBadge">Readiness</span>
-      <h2 id="questionTitle" style="font-size:1.7rem;margin-top:14px">Loading...</h2>
-      <p class="mini-note" id="questionHelp"></p>
-      <div class="progress"><div id="progressBar"></div></div>
-      <div id="options" class="options"></div>
-      <div class="cta-row"><button id="backBtn" class="btn btn-ghost" type="button">← Back</button><button id="nextBtn" class="btn btn-primary" type="button">Next →</button></div>
-    </div>
-
-    <div id="result" class="quiz-card hidden">
-      <div class="eyebrow">Your score is ready</div>
-      <h2>Your D365 AI & Data Readiness Score</h2>
-      <div class="result-box"><div class="score-big"><span id="scoreValue">0</span>/100</div><p id="scoreLabel" class="mini-note"></p></div>
-      <div id="recommendations"></div>
-      <h3 style="margin-top:28px">Get this report reviewed by Alturate LLP</h3>
-      <p class="mini-note">Leave your details and we will review your score manually. Do not submit confidential ERP data.</p>
-      <form id="scoreForm" action="https://api.web3forms.com/submit" method="POST">
+  <div class="container form-wrap">
+    <div class="form-card">
+      <h2 style="font-size:1.65rem">Book Your Free Call</h2>
+      <p class="mini-note" style="margin-bottom:24px">Use this form for D365 F&O, Fabric/Power BI, ERP data readiness, workflow automation, or AI/Copilot readiness enquiries.</p>
+      <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="6413159c-9e3a-48e1-9225-8b4ed8974247">
-        <input type="hidden" name="from_name" value="Alturate LLP AI Readiness Score">
-        <input type="hidden" name="subject" value="New D365 AI & Data Readiness Score Submission">
-        <input type="hidden" id="scoreField" name="Readiness Score" value="">
-        <input type="hidden" id="answersField" name="Assessment Answers" value="">
+        <input type="hidden" name="from_name" value="Alturate LLP Contact Form">
+        <input type="hidden" name="subject" value="New Alturate LLP Website Enquiry">
+        <input type="hidden" name="redirect" value="https://alturate.com/thank-you.html">
         <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off">
-        <div class="form-row" style="margin-top:18px">
-          <div class="form-group"><label>Name *</label><input name="Name" required placeholder="Your name"></div>
-          <div class="form-group"><label>Work Email *</label><input type="email" name="email" required placeholder="you@company.com"></div>
+        <div class="form-row">
+          <div class="form-group"><label for="firstName">First Name *</label><input id="firstName" name="First Name" required placeholder="John"></div>
+          <div class="form-group"><label for="lastName">Last Name *</label><input id="lastName" name="Last Name" required placeholder="Smith"></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label>Company *</label><input name="Company" required></div>
-          <div class="form-group"><label>ERP System</label><input name="ERP System" value="Dynamics 365 F&O"></div>
+          <div class="form-group"><label for="email">Work Email *</label><input id="email" type="email" name="email" required placeholder="you@company.com"></div>
+          <div class="form-group"><label for="company">Company Name *</label><input id="company" name="Company" required placeholder="Company name"></div>
         </div>
-        <button class="btn btn-primary" type="submit">Send My Score to Alturate →</button>
-        <a class="btn btn-ghost" href="contact.html" style="margin-left:10px">Book a Call</a>
+        <div class="form-row">
+          <div class="form-group"><label for="size">Company Size *</label><select id="size" name="Company Size" required><option value="">Select size</option><option>50–150 employees</option><option>151–500 employees</option><option>501–1000 employees</option><option>1000+ employees</option></select></div>
+          <div class="form-group"><label for="service">I need help with *</label><select id="service" name="Service Needed" required><option value="">Select service</option><option>D365 AI & Data Readiness Assessment</option><option>D365 + Fabric / Power BI Reporting Modernization</option><option>D365 F&O Support Retainer</option><option>Workflow / Approval / Power Automate Automation</option><option>Integration or Data Issue</option><option>Not sure yet</option></select></div>
+        </div>
+        <div class="form-group"><label for="challenge">Biggest challenge right now *</label><select id="challenge" name="Main Challenge" required><option value="">Select your main challenge</option><option>ERP data is messy or unreliable</option><option>Power BI reports are slow, wrong, or failing</option><option>Too many manual Excel/process workarounds</option><option>Current D365 support partner is slow</option><option>We want to evaluate Copilot/AI but are not ready</option><option>We need D365 F&O integration or automation help</option><option>Something else</option></select></div>
+        <div class="form-group"><label for="message">Anything else we should know?</label><textarea id="message" name="Message" placeholder="Briefly describe the issue, system, timeline, or goal."></textarea></div>
+        <div class="checkbox"><input id="consent" type="checkbox" name="Consent" value="Agreed" required><label for="consent">I agree to be contacted by Alturate LLP about my enquiry. We do not sell your information. Read our <a href="privacy.html">Privacy Policy</a>.</label></div>
+        <button class="btn btn-primary" type="submit" style="width:100%">Book My Free Call →</button>
+        <p class="mini-note" style="text-align:center">We respond within one business day. Do not submit passwords, production data, or confidential ERP files through this form.</p>
       </form>
     </div>
+    <aside>
+      <div class="card"><h3>Prefer email?</h3><p>Send a short note to <a href="mailto:hello@alturate.com" style="color:var(--gold)">hello@alturate.com</a>. For partner or subcontracting enquiries, use subject line “Partner Enquiry”.</p></div>
+      <div class="card" style="margin-top:18px"><h3>What happens next</h3><ul><li>You submit the form</li><li>We review the fit</li><li>We send a calendar link</li><li>We discuss your D365/Fabric/AI readiness problem</li><li>You get a recommended next step</li></ul></div>
+      <div class="card" style="margin-top:18px"><h3>Good fit problems</h3><p>D365 F&O reporting pain, Fabric/Power BI issues, ERP data readiness, manual workflows, integrations, approvals, and practical AI/Copilot readiness.</p></div>
+    </aside>
   </div>
 </section>
-<script>
-const questions = [
- {cat:'Data Quality',q:'Do you have clear ownership for customers, vendors, items, dimensions, and chart of accounts data?',help:'AI and reporting need clean master data ownership.',w:8},
- {cat:'Data Quality',q:'Can business users trust key D365 data without exporting and fixing it in Excel?',help:'Excel repair work is a sign that the ERP foundation is weak.',w:8},
- {cat:'Reporting & Fabric',q:'Do your critical Power BI reports refresh reliably and match finance/operations expectations?',help:'Trusted reporting is the first layer before AI.',w:9},
- {cat:'Reporting & Fabric',q:'Do you know which D365 F&O tables power your most important reports?',help:'Lineage matters when modernizing to Fabric.',w:7},
- {cat:'Reporting & Fabric',q:'Are you using a planned Fabric/Synapse Link strategy instead of random exports and manual data pulls?',help:'Modern reporting needs a controlled data architecture.',w:7},
- {cat:'Workflow',q:'Are approvals, exceptions, and operational follow-ups visible with owners and due dates?',help:'Agents cannot fix unclear business ownership.',w:7},
- {cat:'Automation',q:'Are Power Automate flows and integrations documented, monitored, and owned?',help:'Automation without governance becomes another support problem.',w:7},
- {cat:'Security',q:'Are D365 security roles, BI permissions, and data access reviewed before AI use cases?',help:'AI readiness requires access control readiness.',w:9},
- {cat:'AI Use Cases',q:'Have you ranked AI/Copilot use cases by business value, risk, and data readiness?',help:'Do not start with the coolest demo. Start with the safest ROI.',w:8},
- {cat:'ROI',q:'Can you measure hours saved, errors reduced, or cycle time improved for the first AI/automation pilot?',help:'If ROI cannot be measured, the pilot will be hard to justify.',w:8}
-];
-const optionValues=[{label:'No / not sure',v:0},{label:'Partially',v:.5},{label:'Mostly yes',v:.8},{label:'Yes, documented and actively managed',v:1}];
-let i=0; const answers=Array(questions.length).fill(null);
-const qTitle=document.getElementById('questionTitle'), qHelp=document.getElementById('questionHelp'), options=document.getElementById('options'), progress=document.getElementById('progressBar'), cat=document.getElementById('categoryBadge');
-function render(){const q=questions[i];cat.textContent=q.cat + ' • Question ' + (i+1) + ' of ' + questions.length;qTitle.textContent=q.q;qHelp.textContent=q.help;progress.style.width=((i)/questions.length*100)+'%';options.innerHTML='';optionValues.forEach((o,idx)=>{const id='opt'+idx; const div=document.createElement('label'); div.className='option'; div.innerHTML=`<input type="radio" name="answer" value="${o.v}" ${answers[i]===o.v?'checked':''}> <span>${o.label}</span>`; div.onclick=()=>{answers[i]=o.v}; options.appendChild(div);});document.getElementById('backBtn').style.visibility=i===0?'hidden':'visible';document.getElementById('nextBtn').textContent=i===questions.length-1?'See Score →':'Next →';}
-function score(){let earned=0,total=0;questions.forEach((q,idx)=>{total+=q.w;earned+=(answers[idx]??0)*q.w});return Math.round(earned/total*100)}
-document.getElementById('backBtn').onclick=()=>{if(i>0){i--;render()}};
-document.getElementById('nextBtn').onclick=()=>{const selected=document.querySelector('input[name="answer"]:checked'); if(!selected){alert('Select one option to continue.');return;} answers[i]=Number(selected.value); if(i<questions.length-1){i++;render()}else{showResult()}};
-function showResult(){const s=score();document.getElementById('quiz').classList.add('hidden');document.getElementById('result').classList.remove('hidden');document.getElementById('scoreValue').textContent=s;document.getElementById('scoreField').value=s+'/100';document.getElementById('answersField').value=questions.map((q,idx)=>q.cat+': '+q.q+' = '+(answers[idx]??'not answered')).join('\\n');let label='';let rec=[];if(s<40){label='High risk. Do not start with AI agents. Start with ERP data/reporting readiness.';rec=['Run a D365 AI & Data Readiness Assessment','Identify top 10 data/reporting risks','Pick one reporting or workflow pilot before AI'];}else if(s<70){label='Medium readiness. You may be ready for a focused pilot, but only after fixing priority gaps.';rec=['Prioritize Fabric/Power BI reporting risks','Define one safe AI/automation use case','Review permissions and data ownership'];}else{label='Good foundation. You may be ready for a controlled AI/Copilot or automation pilot.';rec=['Choose one measurable pilot','Keep human approval for business actions','Track ROI and adoption weekly'];}document.getElementById('scoreLabel').textContent=label;document.getElementById('recommendations').innerHTML='<h3>Priority recommendations</h3><ul class="check-list">'+rec.map(r=>'<li>'+r+'</li>').join('')+'</ul>';}
-render();
-</script>
 
 
 <footer class="footer">
